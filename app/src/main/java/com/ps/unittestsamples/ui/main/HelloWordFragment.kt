@@ -10,22 +10,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.ps.unittestsamples.R
 import com.ps.unittestsamples.ui.main.viewmodel.HelloWorldViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.ps.unittestsamples.ui.main.viewmodel.MyViewModelFactory
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
 Created by Prokash Sarkar on Sun, September 19, 2021
 Copyright (c) 2021 prokashsarkar.com. All rights reserved.
  **/
-@AndroidEntryPoint
 class HelloWordFragment : Fragment() {
 
-    @Inject
-    lateinit var dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    private val viewModel: HelloWorldViewModel by viewModels()
+    private val viewModel: HelloWorldViewModel by viewModels {
+        MyViewModelFactory(dispatcher)
+    }
 
     lateinit var tvHelloWorld: TextView
 
